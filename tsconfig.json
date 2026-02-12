@@ -2,5 +2,18 @@
   "extends": "./tsconfig.base.json",
   "compileOnSave": false,
   "files": [],
-  "references": []
+  "references": [
+    {
+      "path": "./packages/utils"
+    },
+    {
+      "path": "./packages/utils"
+    },
+    {
+      "path": "./packages/icons"
+    },
+    {
+      "path": "./packages/components"
+    }
+  ]
 }
