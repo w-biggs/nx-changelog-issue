@@ -10,28 +10,20 @@ Demonstrates issue with `nx release changelog` when using `projectsRelationship:
 
 ## Test Cases
 
-### 1. Show the error (stock Nx)
+Run these in order:
+
 ```bash
-./demo-stock.sh
+# 1. Show the error (stock Nx)
+npm run demo:stock
+
+# 2. Show what's happening internally  
+npm run demo:with-logging
+
+# 3. Show the fix working
+npm run demo:with-fix
 ```
-
-Runs `npx nx release changelog utils` - errors trying to find tags for dependent projects.
-
-### 2. Show what's happening internally
-```bash
-./demo-with-logging.sh
-```
-
-Applies patch with debug logging to show which projects are being processed.
-
-### 3. Show the fix working
-```bash
-./demo-with-fix.sh
-```
-
-Applies the fix - excludes dependents from `projectNodes` when `projectsRelationship: 'independent'`.
 
 ## Patches
 
-- `patches/add-logging.patch` - adds console.log statements
-- `patches/fix-issue.patch` - proposed fix excluding dependents for independent projects
+- `patches/nx+22.5.0+with-logging.patch` - adds debug logging
+- `patches/nx+22.5.0+with-fix.patch` - proposed fix excluding dependents for independent projects
