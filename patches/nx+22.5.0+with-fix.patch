@@ -1,8 +1,8 @@
 diff --git a/node_modules/nx/src/command-line/release/changelog.js b/node_modules/nx/src/command-line/release/changelog.js
-index 20bde69..42d6b7e 100644
+index 20bde69..2fb7beb 100644
 --- a/node_modules/nx/src/command-line/release/changelog.js
 +++ b/node_modules/nx/src/command-line/release/changelog.js
-@@ -278,11 +278,18 @@ function createAPI(overrideReleaseConfig, ignoreNxJsonConfig) {
+@@ -278,14 +278,29 @@ function createAPI(overrideReleaseConfig, ignoreNxJsonConfig) {
                      Array.from(releaseGraph.releaseGroupToFilteredProjects.get(releaseGroup)).flatMap((project) => {
                          return [
                              project,
@@ -19,9 +19,20 @@ index 20bde69..42d6b7e 100644
 +            console.log(`\n[FIX APPLIED] Release group: ${releaseGroup.name}, projectsRelationship: ${releaseGroup.projectsRelationship}`);
 +            console.log(`[FIX APPLIED] Projects array (dependents excluded for independent):`, projects);
 +            console.log(`[FIX APPLIED] projectsVersionData keys:`, Object.keys(projectsVersionData));
++            console.log(`\n[DEBUG] Release group: ${releaseGroup.name}, projectsRelationship: ${releaseGroup.projectsRelationship}`);
++            console.log(`[DEBUG] Projects array (includes dependents):`, projects);
++            console.log(`[DEBUG] projectsVersionData keys (projects with version changes):`, Object.keys(projectsVersionData));
              const projectNodes = projects.map((name) => projectGraph.nodes[name]);
              if (releaseGroup.projectsRelationship === 'independent') {
                  for (const project of projectNodes) {
++                    console.log(`\n[DEBUG] Processing project: ${project.name}`);
++                    console.log(`[DEBUG] Has version data: ${!!projectsVersionData[project.name]}`);
++                    if (!projectsVersionData[project.name]) {
++                        console.log(`[DEBUG] Skipping git operations for ${project.name} - no version data, but will still try to find tag and ERROR`);
++                    }
+                     let changes = null;
+                     if (releaseGroup.resolvedVersionPlans) {
+                         changes = (0, version_plan_utils_1.createChangesFromProjectsVersionPlans)(releaseGroup.resolvedVersionPlans, project.name);
 diff --git a/node_modules/nx/src/command-line/release/changelog.js.backup b/node_modules/nx/src/command-line/release/changelog.js.backup
 new file mode 100644
 index 0000000..20bde69
