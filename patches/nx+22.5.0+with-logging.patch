@@ -2,7 +2,7 @@ diff --git a/node_modules/nx/src/command-line/release/changelog.js b/node_module
 index 20bde69..be8210c 100644
 --- a/node_modules/nx/src/command-line/release/changelog.js
 +++ b/node_modules/nx/src/command-line/release/changelog.js
-@@ -283,9 +283,17 @@ function createAPI(overrideReleaseConfig, ignoreNxJsonConfig) {
+@@ -283,9 +283,14 @@ function createAPI(overrideReleaseConfig, ignoreNxJsonConfig) {
                      })
                  : // Otherwise, we use the full list of projects within the release group
                      releaseGroup.projects;
@@ -14,9 +14,6 @@ index 20bde69..be8210c 100644
                  for (const project of projectNodes) {
 +                    console.log(`\n[DEBUG] Processing project: ${project.name}`);
 +                    console.log(`[DEBUG] Has version data: ${!!projectsVersionData[project.name]}`);
-+                    if (!projectsVersionData[project.name]) {
-+                        console.log(`[DEBUG] Skipping git operations for ${project.name} - no version data, but will still try to find tag and ERROR`);
-+                    }
                      let changes = null;
                      if (releaseGroup.resolvedVersionPlans) {
                          changes = (0, version_plan_utils_1.createChangesFromProjectsVersionPlans)(releaseGroup.resolvedVersionPlans, project.name);
