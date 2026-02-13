@@ -26,4 +26,4 @@ npm run demo:with-fix
 ## Patches
 
 - `patches/nx+22.5.0+with-logging.patch` - adds debug logging
-- `patches/nx+22.5.0+with-fix.patch` - proposed fix excluding dependents for independent projects
+- `patches/nx+22.5.0+with-fix.patch` - workaround patch/fix, excluding dependents for independent projects
