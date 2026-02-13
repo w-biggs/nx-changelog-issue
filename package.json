@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "demo:stock": "echo '\\n=== Running with STOCK Nx (no patches) ===' && npm run patch:restore && npx nx release 1.1.0 -p @my-org/utils --skip-publish --first-release --dry-run",
-    "demo:with-logging": "npm run patch:restore && npm run patch:logging && echo '\\n=== Running with LOGGING patch ===' && npx nx release 1.1.0 -p @my-org/utils --skip-publish --first-release --dry-run; npm run patch:restore",
-    "demo:with-fix": "npm run patch:restore && npm run patch:fix && echo '\\n=== Running with FIX patch ===' && npx nx release 1.1.0 -p @my-org/utils --skip-publish --first-release --dry-run; npm run patch:restore",
+    "demo:stock": "echo '\\n=== Running with STOCK Nx (no patches) ===' && npm run patch:restore && npx nx release 1.1.0 -p @my-org/utils --skip-publish --dry-run",
+    "demo:with-logging": "npm run patch:restore && npm run patch:logging && echo '\\n=== Running with LOGGING patch ===' && npx nx release 1.1.0 -p @my-org/utils --skip-publish --dry-run; npm run patch:restore",
+    "demo:with-fix": "npm run patch:restore && npm run patch:fix && echo '\\n=== Running with FIX patch ===' && npx nx release 1.1.0 -p @my-org/utils --skip-publish --dry-run; npm run patch:restore",
     "patch:logging": "cp patches/nx+22.5.0+with-logging.patch patches/nx+22.5.0.patch && npx patch-package --patch-dir patches",
     "patch:fix": "cp patches/nx+22.5.0+with-fix.patch patches/nx+22.5.0.patch && npx patch-package --patch-dir patches",
-    "patch:restore": "rm -f patches/nx+22.5.0.patch && npm install --prefer-offline --silent"
+    "patch:restore": "[ -f patches/nx+22.5.0.patch ] && npx patch-package --reverse && rm patches/nx+22.5.0.patch || true"
   },
   "private": true,
   "devDependencies": {
@@ -17,7 +17,7 @@
     "@swc/core": "~1.15.5",
     "@swc/helpers": "~0.5.18",
     "@types/node": "20.19.9",
-    "nx": "22.5.0",
+    "nx": "^22.5.0",
     "patch-package": "^8.0.1",
     "prettier": "~3.6.2",
     "tslib": "^2.3.0",
