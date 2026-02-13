@@ -23,10 +23,10 @@
   ],
   "release": {
     "projectsRelationship": "independent",
-    "version": {
-      "preVersionCommand": "npx nx run-many -t build"
-    },
     "releaseTagPattern": "{projectName}@{version}",
+    "version": {
+      "updateDependents": "never"
+    },
     "changelog": {
       "projectChangelogs": true
     }
